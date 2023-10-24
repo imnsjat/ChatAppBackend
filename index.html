@@ -41,15 +41,22 @@
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 password: document.getElementById('pwd').value,
-                password: document.getElementById('phone').value,
+                phone: document.getElementById('phone').value,
             };
             if (isSignUp) {
                 try {
                 const res = await axios.post(`${API_BASE_URL}/signup`, data);
                 console.log(res);
-                
+                if(res.status===201){
+                        alert(res.data.message) ;
+                        document.getElementById('toggleform').click();
+
+                }
                 } catch (error) {
-                console.error('Error sign up:', error);
+                    console.log('error in sign up' , error)
+                    if(error.response.status===403){
+                        alert(error.response.data.msg)
+                }
                 }
             }else{
                 try {
