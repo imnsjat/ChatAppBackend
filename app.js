@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const sequelize = require('./util/database');
 const authroutes = require('./routes/authroutes');
+const approutes = require('./routes/approutes');
 const User = require('./models/user');
 
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(authroutes);
+app.use(approutes);
 
 // sequelize.sync({force:true})
 sequelize.sync()
