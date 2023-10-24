@@ -7,6 +7,7 @@ const sequelize = require('./util/database');
 const authroutes = require('./routes/authroutes');
 const approutes = require('./routes/approutes');
 const User = require('./models/user');
+const Message = require('./models/message');
 
 
 const app = express();
@@ -15,6 +16,9 @@ app.use(cors());
 
 app.use(authroutes);
 app.use(approutes);
+
+User.hasMany(Message)
+Message.belongsTo(User)
 
 // sequelize.sync({force:true})
 sequelize.sync()

@@ -18,15 +18,29 @@
         </div>
         <form action="" class="form-inline mt-3" id="msg">
             <input type="text" class="form-control mr-2" id="msginput" name="msg" placeholder="Type your message here...">
-            <button type="submit" class="btn btn-primary" id="sdmsg">Send Message</button>
+            <button type="submit" class="btn btn-primary" id="sendbtn">Send Message</button>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- <script src="chatapp.js"></script> -->
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const sendmsg = document.getElementById("sendbtn");
+        sendmsg.addEventListener("click", (e) => {
+            e.preventDefault();
+            const message = document.getElementById("msginput").value;
+            const token = localStorage.getItem("token");
+            let data = {
+                    message: message,
+            };
+            axios.post("http://localhost:3000/send", data, {headers: { Authorization: token },})
+            .then(() => {
+                    document.getElementById("msginput").value = "";
+             });
+        });
+
+    </script>
 </body>
 </html>
