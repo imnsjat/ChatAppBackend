@@ -41,6 +41,26 @@
              });
         });
 
+        window.onload = function() {
+            axios.get("http://localhost:3000/getMessages")
+            .then((response) => {
+                    const msgs = document.getElementById("msgs");
+                    response.data.forEach((message) => {
+                        const msgDiv = document.createElement("div");
+                        msgDiv.textContent = message.username;
+                        msgDiv.textContent += ':    ';
+                        msgDiv.textContent +=  message.message;
+                        msgs.appendChild(msgDiv);
+                    });
+            }).catch(err=> console.log('error fething messages' , err));
+        };
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

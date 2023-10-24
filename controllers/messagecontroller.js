@@ -13,3 +13,13 @@ exports.send = async (req,res,next)=>{
         return res.status(500).json({success:false , error : err});
     } 
 }
+
+exports.getmessages = async (req,res,next) =>{
+    try{
+        const messages = await Message.findAll();
+        res.send(messages);
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({success:false , error : err});
+    } 
+}
