@@ -52,9 +52,19 @@ exports.login = async (req,res,next)=>{
         
         if(users[0]){
             const user = users[0];
+            const userid = users[0].dataValues.id;
+            console.log('userid : ' , userid);
             bcrypt.compare(password,user.dataValues.password , async  (err, response )=>{
                 if(response == true){
-                    const token =  await jwt.sign({ id: user.dataValues.id , ispremiumuser : user.dataValues.ispremiumuser }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+                    // const adminGroups = await UserGroup.findAll({
+                    //     where: { userId: userid, isAdmin: true },
+                    //     include: Group
+                    // });
+                    // let groups = [];
+                    // if(adminGroups){
+                    //     groups = adminGroups.map(userGroup => userGroup.Group.name) ;
+                    // }
+                    const token =  await jwt.sign({ id: user.dataValues.id , }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
                     res.status(200).json({
                         message: 'Login successful',
                         user: { username: req.body.username  },
