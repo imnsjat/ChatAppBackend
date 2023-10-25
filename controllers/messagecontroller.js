@@ -25,6 +25,7 @@ exports.getmessages = async (req,res,next) =>{
     try{
         const lastMessageId = req.query.lastMessageId;
         const groupName = req.params.groupName;
+        console.log('group name ',groupName )
         const group = await Group.findOne({ where: { name: groupName } });
         if (!group) {
             return res.status(404).json({ success: false, error: 'Group not found' });

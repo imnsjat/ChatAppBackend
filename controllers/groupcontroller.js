@@ -50,7 +50,7 @@ exports.getUserGroups = async (req, res, next) => {
         if (!result) {
             return res.status(404).json({ success: false, error: 'User not found' });
         }
-        console.log('usergroup result:' , result.dataValues.groups)
+        // console.log('usergroup result:' , result.dataValues.groups)
         res.status(200).json({ success: true, groups: result.dataValues.groups });
     } catch (err) {
         console.log(err);
